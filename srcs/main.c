@@ -1,42 +1,88 @@
 #include "test.h"
+#define WNAME "Test"
 
-typedef struct    s_xvar
+int		ft_key(int keycode, void *data)
 {
-    Display        *display;
-    Window        root;
-    int            screen;
-    int            depth;
-    Visual        *visual;
-    Colormap    cmap;
-    int            private_cmap;
-    t_win_list    *win_list;
-    int            (*loop_hook)();
-    void        *loop_param;
-    int            use_xshm;
-    int            pshm_format;
-    int            do_flush;
-    int            decrgb[6];
-    Atom        wm_delete_window;
-}                t_xvar;
+	t_env	*env;
 
-void mlx_destroy(t_xvar *mlx)
-{
-	XFlush(mlx->display);
-	XCloseDisplay(mlx->display);
-	free(mlx);
+	env = (t_env *)data;
+	if (keycode == K_ESC)
+	{
+		mlx_destroy_image(env->mlx, env->img);
+		mlx_destroy_window(env->mlx, env->win);
+		mlx_destroy(env->mlx);
+		exit(0);
+	}
 }
 
-int   main(int ac, char **av)
+int		ft_loop(void *data)
 {
-	t_xvar	*mlx = 0;
-	t_img	*img = 0;
-	t_win_list	*win = 0;
+	t_env	*env;
 
-	mlx = mlx_init();
-	img = mlx_new_image(mlx, 50, 50);
-	win = mlx_new_window(mlx, 50, 50, "test");
-	mlx_destroy_image(mlx, img);
-	mlx_destroy_window(mlx, win);
-	//mlx_destroy(mlx);
+	env = (t_env *)data;
+	mlx_put_image_to_window(env->mlx, env->win, env->img, 0, 0);
+	return (1);
+}
+
+void 	ft_color_img(void *img, int x, int y)
+{
+	unsigned int	*buffer = 0;
+	int				bpp = 0;
+	int				sl = 0;
+	int				endian = 0;
+	int				size;
+	int				i;
+
+	buffer = mlx_get_data_addr(img, &bpp, &sl, &endian);
+	printf("bpp: %d\nsl: %d\nendian: %d\n", bpp, sl, endian);
+	size = x * y;
+	i = -1;
+	while (++i < size)
+	{
+		buffer[i] = 0xFF0033;
+	}
+}
+
+int   main()
+{
+	t_env	env;
+	int		x;
+	int		y;
+
+	env.mlx = 0;
+	env.img = 0;
+	env.win = 0;
+	env.mlx = mlx_init();
+	if ((env.img = mlx_xpm_file_to_image(env.mlx, "open.xpm", &x, &y)))
+	{
+//		ft_color_img(env.img, SX, SY);
+		if ((env.win = mlx_new_window(env.mlx, x, y, WNAME)))
+		{
+			mlx_key_hook(env.win, ft_key, &env);
+			mlx_loop_hook(env.mlx, ft_loop, &env);
+			mlx_loop(env.mlx);
+		}
+		mlx_destroy_image(env.mlx, env.img);
+	}
+	mlx_destroy(env.mlx);
     return 0;
 }
+/*
+env.mlx = 0;
+env.img = 0;
+env.win = 0;
+env.mlx = mlx_init();
+if ((env.img = mlx_new_image(env.mlx, SX, SY)))
+{
+	ft_color_img(env.img, SX, SY);
+	if ((env.win = mlx_new_window(env.mlx, SX, SY, WNAME)))
+	{
+		mlx_key_hook(env.win, ft_key, &env);
+		mlx_loop_hook(env.mlx, ft_loop, &env);
+		mlx_loop(env.mlx);
+	}
+	mlx_destroy_image(env.mlx, env.img);
+}
+mlx_destroy(env.mlx);
+return 0;
+*/

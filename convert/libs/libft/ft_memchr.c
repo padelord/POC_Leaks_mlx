@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.h                                             :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: padelord <padelord@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/30 19:58:55 by padelord          #+#    #+#             */
-/*   Updated: 2020/05/02 01:55:21 by padelord         ###   ########.fr       */
+/*   Created: 2018/11/07 19:30:03 by padelord          #+#    #+#             */
+/*   Updated: 2018/11/18 23:37:27 by padelord         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TEST_H
-# define TEST_H
-# define SX 100
-# define SY 100
-# define WNAME "Test"
-# include <stdio.h>
-# include "mlx.h"
-# include "ft_keymap.h"
+#include "libft.h"
 
-typedef struct s_env t_env;
-
-struct	s_env
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	void	*mlx;
-	void	*win;
-	void	*img;
-};
+	unsigned char	*t;
+	size_t			i;
 
-#endif
+	t = (unsigned char *)s;
+	i = 0;
+	while (i < n)
+	{
+		if (t[i] == (unsigned char)c)
+			return ((void *)(t + i));
+		i++;
+	}
+	return (0);
+}

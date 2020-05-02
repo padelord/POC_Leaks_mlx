@@ -1,31 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.h                                             :+:      :+:    :+:   */
+/*   ft_strequ.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: padelord <padelord@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/30 19:58:55 by padelord          #+#    #+#             */
-/*   Updated: 2020/05/02 01:55:21 by padelord         ###   ########.fr       */
+/*   Created: 2018/11/18 23:29:22 by padelord          #+#    #+#             */
+/*   Updated: 2018/12/03 00:42:50 by padelord         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TEST_H
-# define TEST_H
-# define SX 100
-# define SY 100
-# define WNAME "Test"
-# include <stdio.h>
-# include "mlx.h"
-# include "ft_keymap.h"
+#include "libft.h"
 
-typedef struct s_env t_env;
-
-struct	s_env
+int		ft_strequ(char const *s1, char const *s2)
 {
-	void	*mlx;
-	void	*win;
-	void	*img;
-};
-
-#endif
+	if (s1 && s2)
+		if (ft_strcmp(s1, s2) == 0)
+			return (1);
+	return (0);
+}

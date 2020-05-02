@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.h                                             :+:      :+:    :+:   */
+/*   base_close.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: padelord <padelord@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/30 19:58:55 by padelord          #+#    #+#             */
-/*   Updated: 2020/05/02 01:55:21 by padelord         ###   ########.fr       */
+/*   Created: 2020/05/02 01:13:41 by padelord          #+#    #+#             */
+/*   Updated: 2020/05/02 01:28:26 by padelord         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TEST_H
-# define TEST_H
-# define SX 100
-# define SY 100
-# define WNAME "Test"
-# include <stdio.h>
-# include "mlx.h"
-# include "ft_keymap.h"
+#include "test.h"
 
-typedef struct s_env t_env;
-
-struct	s_env
+int   main()
 {
-	void	*mlx;
-	void	*win;
-	void	*img;
-};
+	t_env	env;
 
-#endif
+	env.mlx = 0;
+	env.img = 0;
+	env.win = 0;
+	env.mlx = mlx_init();
+	env.img = mlx_new_image(env.mlx, 50, 50);
+	env.win = mlx_new_window(env.mlx, 50, 50, "test");
+	mlx_destroy_image(env.mlx, env.img);
+	mlx_destroy_window(env.mlx, env.win);
+	mlx_destroy(env.mlx);
+    return 0;
+}

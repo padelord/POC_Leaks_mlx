@@ -1,31 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.h                                             :+:      :+:    :+:   */
+/*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: padelord <padelord@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/30 19:58:55 by padelord          #+#    #+#             */
-/*   Updated: 2020/05/02 01:55:21 by padelord         ###   ########.fr       */
+/*   Created: 2018/11/18 23:31:07 by padelord          #+#    #+#             */
+/*   Updated: 2018/12/03 03:34:50 by padelord         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TEST_H
-# define TEST_H
-# define SX 100
-# define SY 100
-# define WNAME "Test"
-# include <stdio.h>
-# include "mlx.h"
-# include "ft_keymap.h"
+#include "libft.h"
 
-typedef struct s_env t_env;
-
-struct	s_env
+char		*ft_strstr(const char *haystack, const char *needle)
 {
-	void	*mlx;
-	void	*win;
-	void	*img;
-};
+	size_t	i;
+	size_t	len;
 
-#endif
+	len = ft_strlen(needle);
+	if (len > ft_strlen(haystack))
+		return (0);
+	if (len == 0)
+		return ((char *)haystack);
+	i = 0;
+	while (haystack[i])
+	{
+		if (ft_strncmp(haystack + i, needle, len) == 0)
+			return ((char *)(haystack + i));
+		i++;
+	}
+	return (0);
+}

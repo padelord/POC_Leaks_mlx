@@ -1,31 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.h                                             :+:      :+:    :+:   */
+/*   ft_min.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: padelord <padelord@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/30 19:58:55 by padelord          #+#    #+#             */
-/*   Updated: 2020/05/02 01:55:21 by padelord         ###   ########.fr       */
+/*   Created: 2018/11/18 23:28:05 by padelord          #+#    #+#             */
+/*   Updated: 2018/11/18 23:38:28 by padelord         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TEST_H
-# define TEST_H
-# define SX 100
-# define SY 100
-# define WNAME "Test"
-# include <stdio.h>
-# include "mlx.h"
-# include "ft_keymap.h"
+#include "libft.h"
 
-typedef struct s_env t_env;
-
-struct	s_env
+size_t	ft_min(size_t n1, size_t n2)
 {
-	void	*mlx;
-	void	*win;
-	void	*img;
-};
-
-#endif
+	return ((n1 < n2) ? n1 : n2);
+}

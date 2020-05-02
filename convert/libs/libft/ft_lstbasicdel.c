@@ -1,31 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.h                                             :+:      :+:    :+:   */
+/*   ft_lstbasicdel.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: padelord <padelord@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/30 19:58:55 by padelord          #+#    #+#             */
-/*   Updated: 2020/05/02 01:55:21 by padelord         ###   ########.fr       */
+/*   Created: 2019/09/25 15:54:47 by padelord          #+#    #+#             */
+/*   Updated: 2019/10/09 17:34:27 by padelord         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TEST_H
-# define TEST_H
-# define SX 100
-# define SY 100
-# define WNAME "Test"
-# include <stdio.h>
-# include "mlx.h"
-# include "ft_keymap.h"
+#include <unistd.h>
+#include <stdlib.h>
+#include "libft.h"
 
-typedef struct s_env t_env;
-
-struct	s_env
+void	ft_lstbasicdel(void *content, size_t size)
 {
-	void	*mlx;
-	void	*win;
-	void	*img;
-};
-
-#endif
+	ft_bzero(content, size);
+	free(content);
+}

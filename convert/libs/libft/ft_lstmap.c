@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.h                                             :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: padelord <padelord@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/30 19:58:55 by padelord          #+#    #+#             */
-/*   Updated: 2020/05/02 01:55:21 by padelord         ###   ########.fr       */
+/*   Created: 2018/11/18 23:27:10 by padelord          #+#    #+#             */
+/*   Updated: 2018/12/02 23:59:10 by padelord         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TEST_H
-# define TEST_H
-# define SX 100
-# define SY 100
-# define WNAME "Test"
-# include <stdio.h>
-# include "mlx.h"
-# include "ft_keymap.h"
+#include "libft.h"
 
-typedef struct s_env t_env;
-
-struct	s_env
+t_list		*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
 {
-	void	*mlx;
-	void	*win;
-	void	*img;
-};
+	t_list	*new;
+	t_list	*dest;
 
-#endif
+	dest = 0;
+	while (lst)
+	{
+		if (!(new = f(lst)))
+			return (0);
+		ft_lstpback(&dest, new);
+		lst = lst->next;
+	}
+	return (dest);
+}

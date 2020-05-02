@@ -1,31 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.h                                             :+:      :+:    :+:   */
+/*   ft_strsub.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: padelord <padelord@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/30 19:58:55 by padelord          #+#    #+#             */
-/*   Updated: 2020/05/02 01:55:21 by padelord         ###   ########.fr       */
+/*   Created: 2018/11/18 23:31:11 by padelord          #+#    #+#             */
+/*   Updated: 2018/12/03 00:43:59 by padelord         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TEST_H
-# define TEST_H
-# define SX 100
-# define SY 100
-# define WNAME "Test"
-# include <stdio.h>
-# include "mlx.h"
-# include "ft_keymap.h"
+#include "libft.h"
 
-typedef struct s_env t_env;
-
-struct	s_env
+char	*ft_strsub(char const *s, unsigned int start, size_t len)
 {
-	void	*mlx;
-	void	*win;
-	void	*img;
-};
+	char	*dest;
+	size_t	size;
+	size_t	i;
 
-#endif
+	if (!s)
+		return (0);
+	size = ft_strlen(s);
+	if (start >= size || size < len)
+		return (0);
+	if (!(dest = ft_strnew(ft_min(size - start, len))))
+		return (0);
+	i = 0;
+	while (s[start + i] && i < len)
+	{
+		dest[i] = s[start + i];
+		i++;
+	}
+	return (dest);
+}

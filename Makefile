@@ -1,14 +1,22 @@
 NAME	=	test
+SRC		=	srcs/main.c
+OBJ		=	$(SRC:.c=.o)
 
-SRCS	=	main.c
+NAME1	=	test1
+SRC1	=	srcs/base_noclose.c
+OBJ1	=	$(SRC1:.c=.o)
 
-SRC		=	$(addprefix srcs/, $(SRCS))
+NAME2	=	test2
+SRC2	=	srcs/base_close.c
+OBJ2	=	$(SRC2:.c=.o)
 
-OBJ			=	$(SRC:.c=.o)
+OBJS	=	$(OBJ) $(OBJ1) $(OBJ2)
+
+NAMES	=	$(NAME) $(NAME1) $(NAME2)
+
+MLX_LINUX_PATH	=	minilibx_linux_with_destroy/
 
 HEADER	=	test.h
-HEADER	+=	libft/libft.h
-
 
 RM		=	rm -f
 
@@ -24,26 +32,31 @@ ifeq ($(SYS), Darwin)
   LDFLAGS	+=	-framework OpenGL -framework AppKit -L./minilibx_macos -lmlx
   MLX		= minilibx_macos/libmlx.a
 else
-  CFLAGS	+= -I./includes/Linux -I./minilibx_linux
-  LDFLAGS +=	-lXext -lX11 -L./minilibx_linux -lmlx_Linux -lpthread  -D_REENTRANT -DLinux
-  MLX		= minilib_linux/libmlx.a
+  CFLAGS	+= -I./includes/Linux -I./$(MLX_LINUX_PATH)
+  LDFLAGS +=	-lXext -lX11 -L./$(MLX_LINUX_PATH) -lmlx_Linux -lpthread  -D_REENTRANT -DLinux -lbsd
+  MLX		= $(MLX_LINUX_PATH)libmlx.a
 endif
 
 %.o : %.c $(HEADER)
 		$(CC) $(CFLAGS) -c $< -o $@
 
-
-all : $(NAME)
+all : $(NAME) $(NAME1) $(NAME2)
 
 $(NAME) : $(OBJ)
 		@echo "Compiled for $(SYS)"
-		@$(CC) $(OBJ) -o $(NAME) $(LDFLAGS)
+		$(CC) $(OBJ) -o $(NAME) $(LDFLAGS)
+
+$(NAME1) : $(OBJ1)
+		$(CC) $(OBJ1) -o $(NAME1) $(LDFLAGS)
+
+$(NAME2) : $(OBJ2)
+		$(CC) $(OBJ2) -o $(NAME2) $(LDFLAGS)
 
 clean :
-		$(RM) $(OBJ)
+		$(RM) $(OBJS)
 
 fclean : clean
-		$(RM) $(NAME)
+		$(RM) $(NAMES)
 
 re	:	fclean all
 

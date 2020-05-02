@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.h                                             :+:      :+:    :+:   */
+/*   ft_strocontent.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: padelord <padelord@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/30 19:58:55 by padelord          #+#    #+#             */
-/*   Updated: 2020/05/02 01:55:21 by padelord         ###   ########.fr       */
+/*   Created: 2019/09/17 18:56:00 by padelord          #+#    #+#             */
+/*   Updated: 2019/10/09 17:33:02 by padelord         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TEST_H
-# define TEST_H
-# define SX 100
-# define SY 100
-# define WNAME "Test"
-# include <stdio.h>
-# include "mlx.h"
-# include "ft_keymap.h"
+#include "libft.h"
 
-typedef struct s_env t_env;
-
-struct	s_env
+int		ft_strocontent(char *src, char *content)
 {
-	void	*mlx;
-	void	*win;
-	void	*img;
-};
+	int i;
 
-#endif
+	if (!src || !content)
+		return (0);
+	while (*src)
+	{
+		i = -1;
+		while (*src != content[++i])
+			;
+		if (!content[i])
+			return (0);
+		src++;
+	}
+	return (1);
+}

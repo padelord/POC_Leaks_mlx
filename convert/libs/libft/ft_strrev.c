@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.h                                             :+:      :+:    :+:   */
+/*   ft_strrev.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: padelord <padelord@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/30 19:58:55 by padelord          #+#    #+#             */
-/*   Updated: 2020/05/02 01:55:21 by padelord         ###   ########.fr       */
+/*   Created: 2018/11/10 20:28:34 by padelord          #+#    #+#             */
+/*   Updated: 2018/12/06 14:55:45 by padelord         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TEST_H
-# define TEST_H
-# define SX 100
-# define SY 100
-# define WNAME "Test"
-# include <stdio.h>
-# include "mlx.h"
-# include "ft_keymap.h"
+#include "libft.h"
 
-typedef struct s_env t_env;
-
-struct	s_env
+char	*ft_strrev(char *str)
 {
-	void	*mlx;
-	void	*win;
-	void	*img;
-};
+	size_t	len;
+	size_t	i;
 
-#endif
+	if (!str)
+		return (0);
+	len = ft_strlen(str) - 1;
+	i = 0;
+	while (i < len)
+	{
+		ft_cswap(str + i, str + len);
+		i++;
+		len--;
+	}
+	return (str);
+}

@@ -1,31 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.h                                             :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: padelord <padelord@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/30 19:58:55 by padelord          #+#    #+#             */
-/*   Updated: 2020/05/02 01:55:21 by padelord         ###   ########.fr       */
+/*   Created: 2018/11/10 21:32:12 by padelord          #+#    #+#             */
+/*   Updated: 2018/12/06 19:24:55 by padelord         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TEST_H
-# define TEST_H
-# define SX 100
-# define SY 100
-# define WNAME "Test"
-# include <stdio.h>
-# include "mlx.h"
-# include "ft_keymap.h"
+#include "libft.h"
 
-typedef struct s_env t_env;
-
-struct	s_env
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	void	*mlx;
-	void	*win;
-	void	*img;
-};
+	char	*dest;
+	size_t	len;
 
-#endif
+	if (!s1 && s2)
+		return (ft_strdup(s2));
+	else if (s1 && !s2)
+		return (ft_strdup(s1));
+	else if (!s1 && !s2)
+		return (0);
+	len = ft_strlen(s1);
+	if (!(dest = ft_strnew(len + ft_strlen(s2))))
+		return (0);
+	ft_strcpy(dest, s1);
+	ft_strcpy(dest + len, s2);
+	return (dest);
+}

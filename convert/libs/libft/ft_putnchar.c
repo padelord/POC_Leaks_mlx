@@ -1,31 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.h                                             :+:      :+:    :+:   */
+/*   ft_putnchar.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: padelord <padelord@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/30 19:58:55 by padelord          #+#    #+#             */
-/*   Updated: 2020/05/02 01:55:21 by padelord         ###   ########.fr       */
+/*   Created: 2018/11/18 23:28:28 by padelord          #+#    #+#             */
+/*   Updated: 2018/11/18 23:39:06 by padelord         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TEST_H
-# define TEST_H
-# define SX 100
-# define SY 100
-# define WNAME "Test"
-# include <stdio.h>
-# include "mlx.h"
-# include "ft_keymap.h"
+#include <unistd.h>
+#include "libft.h"
 
-typedef struct s_env t_env;
-
-struct	s_env
+void	ft_putnchar(char c, size_t len)
 {
-	void	*mlx;
-	void	*win;
-	void	*img;
-};
+	char	buff[BUFF_SIZE];
 
-#endif
+	ft_memset(buff, c, BUFF_SIZE);
+	while (len > 0)
+		len -= write(1, buff, ((len > BUFF_SIZE) ? BUFF_SIZE : len));
+}

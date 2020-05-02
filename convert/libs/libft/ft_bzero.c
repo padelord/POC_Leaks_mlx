@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.h                                             :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: padelord <padelord@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/30 19:58:55 by padelord          #+#    #+#             */
-/*   Updated: 2020/05/02 01:55:21 by padelord         ###   ########.fr       */
+/*   Created: 2018/11/08 03:24:40 by padelord          #+#    #+#             */
+/*   Updated: 2019/11/05 18:29:08 by padelord         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TEST_H
-# define TEST_H
-# define SX 100
-# define SY 100
-# define WNAME "Test"
-# include <stdio.h>
-# include "mlx.h"
-# include "ft_keymap.h"
+#include "libft.h"
 
-typedef struct s_env t_env;
-
-struct	s_env
+void	ft_bzero(void *s, size_t n)
 {
-	void	*mlx;
-	void	*win;
-	void	*img;
-};
+	size_t	nd;
 
-#endif
+	nd = n >> 3;
+	n &= 0x00000007;
+	while (nd--)
+	{
+		*((long int*)(s)) = 0l;
+		s += 8;
+	}
+	while (n--)
+	{
+		*((unsigned char*)(s)) = 0;
+		s++;
+	}
+}

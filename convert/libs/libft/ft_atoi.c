@@ -1,31 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.h                                             :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: padelord <padelord@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/30 19:58:55 by padelord          #+#    #+#             */
-/*   Updated: 2020/05/02 01:55:21 by padelord         ###   ########.fr       */
+/*   Created: 2018/11/07 00:57:22 by padelord          #+#    #+#             */
+/*   Updated: 2018/12/03 00:03:35 by padelord         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TEST_H
-# define TEST_H
-# define SX 100
-# define SY 100
-# define WNAME "Test"
-# include <stdio.h>
-# include "mlx.h"
-# include "ft_keymap.h"
+#include "libft.h"
 
-typedef struct s_env t_env;
-
-struct	s_env
+int		ft_atoi(const char *str)
 {
-	void	*mlx;
-	void	*win;
-	void	*img;
-};
+	size_t			i;
+	int				sign;
+	unsigned int	nb;
 
-#endif
+	i = 0;
+	while (str[i] && ft_isspace(str[i]))
+		i++;
+	sign = 1;
+	if (str[i] == '-' || str[i] == '+')
+		sign = 44 - str[i++];
+	nb = 0;
+	while (str[i] && ft_isdigit(str[i]))
+	{
+		nb *= 10;
+		nb += str[i] - '0';
+		i++;
+	}
+	return ((int)(nb * sign));
+}

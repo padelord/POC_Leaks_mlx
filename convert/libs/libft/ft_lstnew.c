@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.h                                             :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: padelord <padelord@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/30 19:58:55 by padelord          #+#    #+#             */
-/*   Updated: 2020/05/02 01:55:21 by padelord         ###   ########.fr       */
+/*   Created: 2018/11/10 20:12:31 by padelord          #+#    #+#             */
+/*   Updated: 2018/12/03 03:31:14 by padelord         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TEST_H
-# define TEST_H
-# define SX 100
-# define SY 100
-# define WNAME "Test"
-# include <stdio.h>
-# include "mlx.h"
-# include "ft_keymap.h"
+#include <stdlib.h>
+#include "libft.h"
 
-typedef struct s_env t_env;
-
-struct	s_env
+t_list	*ft_lstnew(void const *content, size_t content_size)
 {
-	void	*mlx;
-	void	*win;
-	void	*img;
-};
+	t_list	*dest;
 
-#endif
+	if (!(dest = (t_list *)ft_memalloc(sizeof(*dest))))
+		return (0);
+	if (!content || content_size == 0)
+		return (dest);
+	if (!(dest->content = ft_memdup(content, content_size)))
+		return (0);
+	dest->content_size = content_size;
+	return (dest);
+}

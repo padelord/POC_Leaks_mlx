@@ -1,31 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.h                                             :+:      :+:    :+:   */
+/*   mlx_destroy.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: padelord <padelord@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/30 19:58:55 by padelord          #+#    #+#             */
-/*   Updated: 2020/05/02 01:55:21 by padelord         ###   ########.fr       */
+/*   Created: 2020/05/02 00:50:53 by padelord          #+#    #+#             */
+/*   Updated: 2020/05/02 00:53:18 by padelord         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TEST_H
-# define TEST_H
-# define SX 100
-# define SY 100
-# define WNAME "Test"
-# include <stdio.h>
-# include "mlx.h"
-# include "ft_keymap.h"
+#include "mlx_int.h"
 
-typedef struct s_env t_env;
-
-struct	s_env
+int		mlx_destroy(t_xvar *mlx)
 {
-	void	*mlx;
-	void	*win;
-	void	*img;
-};
-
-#endif
+	if (mlx && mlx->display)
+	{
+		XFlush(mlx->display);
+		XCloseDisplay(mlx->display);
+		free(mlx);
+		return (1);
+	}
+	return (0);
+}

@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.h                                             :+:      :+:    :+:   */
+/*   ft_lstpback.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: padelord <padelord@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/30 19:58:55 by padelord          #+#    #+#             */
-/*   Updated: 2020/05/02 01:55:21 by padelord         ###   ########.fr       */
+/*   Created: 2018/12/02 23:59:21 by padelord          #+#    #+#             */
+/*   Updated: 2019/09/24 16:09:39 by padelord         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TEST_H
-# define TEST_H
-# define SX 100
-# define SY 100
-# define WNAME "Test"
-# include <stdio.h>
-# include "mlx.h"
-# include "ft_keymap.h"
+#include "libft.h"
 
-typedef struct s_env t_env;
-
-struct	s_env
+void	ft_lstpback(t_list **alst, t_list *new)
 {
-	void	*mlx;
-	void	*win;
-	void	*img;
-};
+	t_list	*l;
 
-#endif
+	if (*alst == 0)
+	{
+		*alst = new;
+		return ;
+	}
+	l = *alst;
+	while (l->next)
+		l = l->next;
+	l->next = new;
+}

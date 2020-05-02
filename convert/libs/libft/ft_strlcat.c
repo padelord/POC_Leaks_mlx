@@ -1,31 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.h                                             :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: padelord <padelord@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/30 19:58:55 by padelord          #+#    #+#             */
-/*   Updated: 2020/05/02 01:55:21 by padelord         ###   ########.fr       */
+/*   Created: 2018/11/10 23:56:43 by padelord          #+#    #+#             */
+/*   Updated: 2018/12/03 03:33:43 by padelord         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TEST_H
-# define TEST_H
-# define SX 100
-# define SY 100
-# define WNAME "Test"
-# include <stdio.h>
-# include "mlx.h"
-# include "ft_keymap.h"
+#include "libft.h"
 
-typedef struct s_env t_env;
-
-struct	s_env
+size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
-	void	*mlx;
-	void	*win;
-	void	*img;
-};
+	size_t	i;
+	size_t	len_dst;
 
-#endif
+	if (size == 0)
+		return (ft_strlen(src) + size);
+	len_dst = ft_strlen(dst);
+	i = 0;
+	while (src[i] && i + len_dst < size - 1)
+	{
+		dst[len_dst + i] = src[i];
+		i++;
+	}
+	dst[len_dst + i] = '\0';
+	if (size < len_dst)
+		return (ft_strlen(src) + size);
+	return (len_dst + ft_strlen(src));
+}

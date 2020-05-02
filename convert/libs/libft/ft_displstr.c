@@ -1,31 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.h                                             :+:      :+:    :+:   */
+/*   ft_displstr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: padelord <padelord@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/30 19:58:55 by padelord          #+#    #+#             */
-/*   Updated: 2020/05/02 01:55:21 by padelord         ###   ########.fr       */
+/*   Created: 2019/02/08 21:56:30 by padelord          #+#    #+#             */
+/*   Updated: 2019/02/08 21:56:55 by padelord         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TEST_H
-# define TEST_H
-# define SX 100
-# define SY 100
-# define WNAME "Test"
-# include <stdio.h>
-# include "mlx.h"
-# include "ft_keymap.h"
+#include <unistd.h>
+#include "libft.h"
 
-typedef struct s_env t_env;
-
-struct	s_env
+void	ft_displstr(t_list *lst)
 {
-	void	*mlx;
-	void	*win;
-	void	*img;
-};
-
-#endif
+	if (!lst)
+		return ;
+	ft_displstr(lst->next);
+	write(1, lst->content, lst->content_size);
+}
