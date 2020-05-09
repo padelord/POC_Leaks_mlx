@@ -6,7 +6,7 @@
 #    By: crenaudi <crenaudi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/13 14:13:30 by crenaudi          #+#    #+#              #
-#    Updated: 2020/05/01 02:52:42 by padelord         ###   ########.fr        #
+#    Updated: 2020/05/02 20:17:34 by padelord         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,29 +24,29 @@ CFLAGS += -I./includes/libgfx_includes/MacOs
 LDFLAGS = -framework OpenGl -framework AppKit
 else
 CFLAGS += -I./includes/libgfx_includes/Linux
-LDFLAGS = -lXext -lX11
+LDFLAGS = -lXext -lX11 -lbsd
 endif
 
 LDFLAGS += -lm
 LDFLAGS += -L./$(LIBGFX_FOLDER) -lgfx
 LDFLAGS += -L./$(LIBFT_FOLDER) -lft
 CFLAGS += -I./includes/libgfx_includes/
-LDFLAGS += -lmlx -lbsd
+LDFLAGS += -lmlx
 
 
 
 RM = rm -f
 SRCS = 	main.c		\
-	init.c		\
-	texture.c	\
-	raycast.c	\
-	key.c		\
-	parse.c		\
-	legend.c	\
-	clean.c		\
-	draw.c		\
-	move.c		\
-	error.c
+		init.c		\
+		texture.c	\
+		raycast.c	\
+		key.c		\
+		parse.c		\
+		legend.c	\
+		clean.c		\
+		draw.c		\
+		move.c		\
+		error.c
 
 SRC	=	$(addprefix src/, $(SRCS))
 

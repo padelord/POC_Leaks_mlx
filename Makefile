@@ -1,12 +1,12 @@
-NAME	=	test
+NAME	=	bin/test
 SRC		=	srcs/main.c
 OBJ		=	$(SRC:.c=.o)
 
-NAME1	=	test1
+NAME1	=	bin/test1
 SRC1	=	srcs/base_noclose.c
 OBJ1	=	$(SRC1:.c=.o)
 
-NAME2	=	test2
+NAME2	=	bin/test2
 SRC2	=	srcs/base_close.c
 OBJ2	=	$(SRC2:.c=.o)
 
@@ -14,7 +14,6 @@ OBJS	=	$(OBJ) $(OBJ1) $(OBJ2)
 
 NAMES	=	$(NAME) $(NAME1) $(NAME2)
 
-MLX_LINUX_PATH	=	minilibx_linux_with_destroy/
 
 HEADER	=	test.h
 
@@ -32,6 +31,7 @@ ifeq ($(SYS), Darwin)
   LDFLAGS	+=	-framework OpenGL -framework AppKit -L./minilibx_macos -lmlx
   MLX		= minilibx_macos/libmlx.a
 else
+  MLX_LINUX_PATH	=	minilibx_linux_with_destroy/
   CFLAGS	+= -I./includes/Linux -I./$(MLX_LINUX_PATH)
   LDFLAGS +=	-lXext -lX11 -L./$(MLX_LINUX_PATH) -lmlx_Linux -lpthread  -D_REENTRANT -DLinux -lbsd
   MLX		= $(MLX_LINUX_PATH)libmlx.a
